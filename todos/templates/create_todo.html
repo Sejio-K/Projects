@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+
+{% block content %}
+  <h1>Добавить задачу</h1>
+  <form method="POST" action="{% url 'add_todo' %}">
+    {% csrf_token %}
+    <label for="title">Заголовок:</label>
+    <input type="text" id="title" name="title" required><br><br>
+    
+    <label for="description">Описание:</label>
+    <textarea id="description" name="description"></textarea><br><br>
+    
+    <button type="submit">Добавить задачу</button>
+  </form>
+{% endblock %}

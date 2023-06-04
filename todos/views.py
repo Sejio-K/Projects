@@ -1,6 +1,6 @@
 import requests
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 import json
 
@@ -55,3 +55,15 @@ class TodoJSONView(View):
         todos = Todos()
         todos.fetch_data()
         return JsonResponse(todos.to_json(), safe=False)
+
+def add_todo(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        # создаем новую задачу
+        todo = Todo.objects.create(title=title, description=description)
+
+        return redirect('home')
+
+    return render(request, 'create_todo.html')

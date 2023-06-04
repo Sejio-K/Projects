@@ -6,27 +6,16 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </head>
-</head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th class="head">ID</th>
-                <th class="head">Title</th>
-                <th class="head">Completed</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for todo in todos %}
-            <tr>
-                <td class="head_colomn">{{ todo.id }}</td>
-                <td>{{ todo.title }}</td>
-                <td>{{ todo.completed }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
- <button id="myButton">Нажми меня</button>
+    {% for todo in todos %}
+    <div class="todo">
+        <h2>{{ todo.title }}</h2>
+        <p>ID: {{ todo.id }}</p>
+        <p>Completed: {{ todo.completed }}</p>
+        <button onclick="set_completed({{ todo.id }})">Выполнено</button>
+    </div>
+    {% endfor %}
+    <button id="myButton">Нажми меня</button>
     <p>Количество нажатий: <span id="count">0</span></p>
 </body>
 </html>
