@@ -62,8 +62,10 @@ def add_todo(request):
         description = request.POST.get('description')
 
         # создаем новую задачу
-        todo = Todo.objects.create(title=title, description=description)
+        todo = Todo(id=10, title=title, completed=False)  # пример создания новой задачи
+        todos = Todos()
+        todos.todos.append(todo)
 
-        return redirect('home')
+        return redirect('todo_list_view')
 
     return render(request, 'create_todo.html')
