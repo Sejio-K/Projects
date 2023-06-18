@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Todo List</title>
+    <title>{% block title %} Todo List {% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
-    {% for todo in todos %}
-    <div class="todo">
-        <h2>{{ todo.title }}</h2>
-        <p>ID: {{ todo.id }}</p>
-        <p>Completed: {{ todo.completed }}</p>
-        <button onclick="alert('Задача завершена!'); set_completed({{ todo.id }}); ">Выполнено</button>
 
+    {% block content %}
+        {% for todo in todos %}
+            <div class="todo">
+                <h2>{{ todo.title }}</h2>
+                <p>UserID: {{ todo.userId }}</p>
+                <p>ID: {{ todo.id }}</p>
+                <p>Body: {{ todo.body }}</p>
+                <button onclick="alert('Задача завершена!'); set_completed({{ todo.id }}); ">Выполнено</button>
+            </div>
+        {% endfor %}
+    {% endblock %}
 
-    </div>
-    {% endfor %}
-    <button id="myButton">Нажми меня</button>
+    <button id="myButton">{% block button %} Нажми меня {% endblock %}</button>
     <p>Количество нажатий: <span id="count">0</span></p>
 </body>
 </html>

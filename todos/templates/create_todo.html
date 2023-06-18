@@ -1,5 +1,9 @@
 {% extends "todos/home.html" %}
 
+{% block title %}
+    add todo
+{% endblock %}
+
 {% block content %}
   <h1>Добавить задачу</h1>
   <form method="POST" action="{% url 'add_todo' %}">

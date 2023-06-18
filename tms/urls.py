@@ -21,7 +21,6 @@ from todos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('posts', include('posts.urls')),
     path('todos/home/', TodoListView.as_view(), name='todo_list_view'),
     path('todos/', TodoJSONView.as_view(), name='todo_json_view'),
     path('add/', views.add_todo, name='add_todo'),
