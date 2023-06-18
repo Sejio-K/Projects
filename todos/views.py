@@ -60,14 +60,19 @@ class TodoJSONView(View):
 
 def add_todo(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-
-        # создаем новую задачу
-        todo = Todo(id=10, title=title, completed=False)  # пример создания новой задачи
+        task = request.POST.dict()
+        task['title'] = str(task['title'])
+        task['body'] = str(task['body'])
+        task['userId'] = str(task['userId'])
+        task['id'] = str(task['id'])
         todos = Todos()
+        todos.fetch_data()
+
+        todo = Todo(task['userId'], task['id'], task['title'], task['body'])
         todos.todos.append(todo)
 
-        return redirect('todo_list_view')
+        json_todo = todos.to_json()
+
+        return render(request, 'todos/home.html', {'todos': json_todo})
 
     return render(request, 'create_todo.html')
