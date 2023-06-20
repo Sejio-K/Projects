@@ -50,7 +50,7 @@ TODOS.fetch_data()
 class TodoListView(View):
     def get(self, request):
 
-        return render(request, 'todos/home.html', {'todos': TODOS})
+        return render(request, 'todos.html', {'todos': TODOS})
 
 
 class TodoJSONView(View):
@@ -69,7 +69,7 @@ def add_todo(request):
         todo = Todo(task['userId'], task['id'], task['title'], task['body'])
         TODOS.todos.append(todo)
 
-        return render(request, 'todos/home.html', {'todos':  TODOS})
+        return render(request, 'todos.html', {'todos':  TODOS})
 
     return render(request, 'create_todo.html')
 
