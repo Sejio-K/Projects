@@ -25,6 +25,7 @@ class Todos:
         else:
             self.todos = []
 
+
     def __iter__(self):
         return iter(self.todos)
 
@@ -44,19 +45,17 @@ class Todos:
         todos.todos = [Todo(data ['userId'], data['id'], data['title'], data['body']) for data in todo_data]
         return todos
 
-
+TODOS = Todos()
+TODOS.fetch_data()
 class TodoListView(View):
     def get(self, request):
-        todos = Todos()
-        todos.fetch_data()
-        return render(request, 'todos/home.html', {'todos': todos})
+
+        return render(request, 'todos/home.html', {'todos': TODOS})
 
 
 class TodoJSONView(View):
     def get(self, request):
-        todos = Todos()
-        todos.fetch_data()
-        return JsonResponse(todos.to_json(), safe=False)
+        return JsonResponse(TODOS.to_json(), safe=False)
 
 def add_todo(request):
     if request.method == 'POST':
@@ -65,14 +64,13 @@ def add_todo(request):
         task['body'] = str(task['body'])
         task['userId'] = str(task['userId'])
         task['id'] = str(task['id'])
-        todos = Todos()
-        todos.fetch_data()
+
 
         todo = Todo(task['userId'], task['id'], task['title'], task['body'])
-        todos.todos.append(todo)
+        TODOS.todos.append(todo)
 
-        json_todo = todos.to_json()
-
-        return render(request, 'todos/home.html', {'todos': json_todo})
+        return render(request, 'todos/home.html', {'todos':  TODOS})
 
     return render(request, 'create_todo.html')
+
+
