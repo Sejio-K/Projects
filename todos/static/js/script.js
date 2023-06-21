@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
   buttons.forEach(function(button) {
     button.addEventListener('click', function() {
       alert('Задача завершена!');
-      const todoId = button.dataset.id;
-      set_completed(todoId);
     });
   });
 });
