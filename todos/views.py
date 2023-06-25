@@ -1,8 +1,9 @@
 import requests
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views import View
 import json
+from .models import Todo
 
 class Todo:
     def __init__(self, userId, id, title, body):
@@ -10,6 +11,7 @@ class Todo:
         self.id = id
         self.title = title
         self.body = body
+
 
 class Todos:
     def __init__(self):
@@ -21,10 +23,9 @@ class Todos:
         if response.status_code == 200:
             # Декодировать данные в формате JSON
             todo_data = response.json()
-            self.todos = [Todo(data ['userId'], data['id'], data['title'], data['body']) for data in todo_data]
+            self.todos = [Todo(data['userId'], data['id'], data['title'], data['body']) for data in todo_data]
         else:
             self.todos = []
-
 
     def __iter__(self):
         return iter(self.todos)
@@ -42,20 +43,23 @@ class Todos:
     def from_json(cls, json_data):
         todos = cls()
         todo_data = json.loads(json_data)
-        todos.todos = [Todo(data ['userId'], data['id'], data['title'], data['body']) for data in todo_data]
+        todos.todos = [Todo(data['userId'], data['id'], data['title'], data['body']) for data in todo_data]
         return todos
+
 
 TODOS = Todos()
 TODOS.fetch_data()
+
+
 class TodoListView(View):
     def get(self, request):
-
         return render(request, 'todos.html', {'todos': TODOS})
 
 
 class TodoJSONView(View):
     def get(self, request):
         return JsonResponse(TODOS.to_json(), safe=False)
+
 
 def add_todo(request):
     if request.method == 'POST':
@@ -65,12 +69,9 @@ def add_todo(request):
         task['userId'] = str(task['userId'])
         task['id'] = str(task['id'])
 
-
         todo = Todo(task['userId'], task['id'], task['title'], task['body'])
         TODOS.todos.append(todo)
 
-        return render(request, 'todos.html', {'todos':  TODOS})
+        return render(request, 'todos.html', {'todos': TODOS})
 
     return render(request, 'create_todo.html')
-
-
