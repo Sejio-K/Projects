@@ -6,7 +6,7 @@ from .models import Todo
 
 def create_initial_db():
     users_data = [
-        {'username': 'lena', 'email': 'lena@gmail.com', 'password': '12345'},
+        {'username': 'fill', 'email': 'fill@gmail.com', 'password': '12345'},
         {'username': 'andrew', 'email': 'andrew@gmail.com', 'password': '12345'},
         {'username': 'olga', 'email': 'olga@gmail.com', 'password': '12345'},
         {'username': 'valeria', 'email': 'valeria@gmail.com', 'password': '12345'},
@@ -34,7 +34,7 @@ def create_initial_db():
         users.append(user)
 
         todo = Todo(
-            userId=user,
+            user=user,
             title=todo_data['title'],
             body=todo_data['body']
         )
