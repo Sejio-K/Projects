@@ -7,6 +7,8 @@ from .models import Todo
 
 
 def todos(request):
+    if request.metod == 'POST':
+        request.POST
     todos = Todo.objects.all()
     return render(request, 'todos.html', {'todos': todos})
 def view_todo(request, todo_id):
