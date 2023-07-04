@@ -8,7 +8,8 @@
             <p>User: {{ todo.user }}</p>
             <p>ID: {{ todo.id }}</p>
             <p>Body: {{ todo.body }}</p>
-            <button class="completed-btn" data-id="{{ todo.id }}">Выполнено</button>
+            <button class="completed-btn">Выполнено</button>
+            <a href="{% url 'todo' todo.id %}" class="view-btn">Просмотр</a>
         </div>
     {% endfor %}
 {% endblock %}
