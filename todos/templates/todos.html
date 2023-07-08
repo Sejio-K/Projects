@@ -4,11 +4,12 @@
 {% block content %}
     {% for todo in todos %}
         <div class="todo">
-            <h2>{{ todo.title }}</h2>
+            <h2>title:{{ todo.title }}</h2>
             <p>User: {{ todo.user }}</p>
             <p>ID: {{ todo.id }}</p>
             <p>Body: {{ todo.body }}</p>
-            <button class="completed-btn" data-id="{{ todo.id }}">Выполнено</button>
+            <button class="completed-btn">Выполнено</button>
+            <a href="{% url 'todo' todo.id %}" class="view-btn">Просмотр</a>
         </div>
     {% endfor %}
 {% endblock %}

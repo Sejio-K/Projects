@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "todos/base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <div class="todo">
+        <h2>{{ todo.title }}</h2>
+        <p>User: {{ todo.user }}</p>
+        <p>ID: {{ todo.id }}</p>
+        <p>Body: {{ todo.body }}</p>
+    </div>
+{% endblock %}
