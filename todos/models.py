@@ -7,5 +7,5 @@ class Todo(models.Model):
     title = models.CharField(max_length=255)
     body = models.CharField(max_length=255)
     created_date = models.DateField(default=date.today)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=255)
     completed = models.BooleanField(default=False)
