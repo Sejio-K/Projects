@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from todos.views import view_todo, todos
+from todos.views import todo, todos
 
 urlpatterns = [
     path('todos/', todos, name='todos'),
-    path('todo/<int:todo_id>/', view_todo, name='todo'),
+    path('todo/<int:todo_id>/', todo, name='todo'),
     path('admin/', admin.site.urls),
 ]
