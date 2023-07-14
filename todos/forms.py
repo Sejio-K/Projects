@@ -11,8 +11,7 @@ class TodoForm(forms.ModelForm):
     def clean_title(self):  # проверка title на длинну
         if len(self.cleaned_data.get('title')) < 2:
             raise ValidationError('Value must be more then 1 character.')
-        self.cleaned_data.get('title')
-
+        return self.cleaned_data.get('title')
 
 class TodoUpdateForm(TodoForm):
     title = forms.CharField(required=False)
