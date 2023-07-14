@@ -1,0 +1,26 @@
+{% extends "todos/base.html" %}
+
+{% block title %}
+    Добавить задачу
+{% endblock %}
+
+{% block content %}
+  <h1>Добавить задачу</h1>
+  <form method="POST" action="{% url 'add_todo' %}">
+    {% csrf_token %}
+    <label for="title">Заголовок:</label>
+    <input type="text" id="title" name="title" required><br><br>
+
+    <label for="id">id:</label>
+    <input type="text" id="id" name="id" required><br><br>
+
+    <label for="userId">userId:</label>
+    <input type="text" id="userId" name="userId" required><br><br>
+
+
+    <label for="body">Описание:</label>
+    <textarea id="body" name="body"></textarea><br><br>
+    
+    <button type="submit">Добавить задачу</button>
+  </form>
+{% endblock %}
