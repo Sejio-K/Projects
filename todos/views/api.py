@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from .forms import TodoForm, TodoUpdateForm
-from .models import Todo
+from todos.forms import TodoForm, TodoUpdateForm
+from todos.models import Todo
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 
