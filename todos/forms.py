@@ -16,7 +16,7 @@ class TodoForm(forms.ModelForm):
 class TodoUpdateForm(TodoForm):
     title = forms.CharField(required=False)
     body = forms.CharField(required=False)
-    completed = forms.CharField(required=False)
+    completed = forms.CharField(required=False, initial=0) # initial - значение с которым идет изначально
 
     class Meta:
         model = Todo

@@ -15,7 +15,7 @@ def todos(request):
         else:
             return JsonResponse({'status': 400, 'errors': form.errors})
     todos_data = [model_to_dict(todo) for todo in Todo.objects.all()]
-    return render(request, 'todos.html', {'todos': todos_data})
+    return JsonResponse({'todos': todos_data})
 
 @csrf_exempt
 def todo(request, todo_id):
@@ -30,4 +30,4 @@ def todo(request, todo_id):
     elif request.method == 'DELETE':
         todo_obj.delete()
         return JsonResponse({'status': 204, 'message': 'Todo successfully deleted'})
-    return render(request, 'todo.html', {'todo': model_to_dict(todo_obj)})
+    return JsonResponse({'todo': model_to_dict(todo_obj)})
