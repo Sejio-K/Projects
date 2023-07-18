@@ -26,3 +26,7 @@ def update_todo(request, todo_id):
         if form.is_valid():
             form.save()
     return render(request, 'update_todo.html', {"form": form})
+
+def delete_todo(request, todo_id):
+    Todo.objects.get(id=todo_id).delete()
+    return redirect('todos')

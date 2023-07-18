@@ -1,7 +1,21 @@
- <div class="todo">
-        <h2>{{ todo.title }}</h2>
-        <p>{{ todo.user_id }}</p>
-        <p>{{ todo.id }}</p>
-        <p>{{ todo.body }}</p>
+<div class="col-sm-6 post-card">
+  <div class="card">
+    <div class="card-header style=background-color: #226bac">
+      <h5 class="card-title">{{todo.title}}</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{todo.body}}</p>
+    <div class="btn-group">
+      <button class="btn btn-outline-info dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Edit
+      </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" style="color: #ffffff; background-color: #69b4ff;" href="{% url 'update_todo' todo_id=todo.id %}" onmouseover="this.style.backgroundColor='#0a79ff';" onmouseout="this.style.backgroundColor='#69b4ff';">Update</a>
+      <a class="dropdown-item" style="color: #ffffff; background-color: #6c757d;" href="#" onmouseover="this.style.backgroundColor='#4e555b';" onmouseout="this.style.backgroundColor='#6c757d';">Another action</a>
+      <a class="dropdown-item" style="color: #ffffff; background-color: #f66;" href="#" onmouseover="this.style.backgroundColor='#f30';" onmouseout="this.style.backgroundColor='#f66';">Delete</a>
     </div>
 
+    </div>
+    </div>
+  </div>
+</div>
