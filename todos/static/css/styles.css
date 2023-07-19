@@ -5,3 +5,8 @@
 .content {
     margin: 30px;
 }
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: rgb(21 195 222);
+    border-color: #000;
+}
