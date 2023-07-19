@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n$+tqlhyg3060t=-mku-^d!3r68wx57b4b1ldo$z2pxb#uah-j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'tms.urls'
+
 
 TEMPLATES = [
     {
