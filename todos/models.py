@@ -7,13 +7,15 @@ class Label(models.Model):
     def __str__(self):
         return self.label_name
 class Priority(models.Model):
+    PRIORITY_CHOICES = (
+        ('Low', 'Low'),
+        ('Medium', 'Medium'),
+        ('High', 'High'),
+    )
+    name = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='Low')
 
-  PRIORITY_CHOICES = (
-    (1, 'High'),
-    (2, 'Medium'),
-    (3, 'Low')
-  )
-
+    def __str__(self):
+        return self.name
 class Todo(models.Model):
     title = models.CharField(max_length=255)
     body = models.CharField(max_length=255)
@@ -21,7 +23,22 @@ class Todo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     labels = models.ManyToManyField(Label, blank=True)
-    priority = models.ForeignKey(Priority, on_delete=models.CASCADE, default=3)
+    priority = models.ForeignKey(Priority, on_delete=models.PROTECT, related_name='todos')
     parent_task = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
 
+def assign_priority_values():
+    # Проверяем, есть ли уже значения приоритетов в модели
+    if Priority.objects.exists():
+        print("Приоритеты уже добавлены.")
+        return
+
+    # Значения приоритетов для добавления
+    priority_values = ['Low', 'Medium', 'High']
+
+    # Создаем объекты Priority и сохраняем их в базу данных
+    for priority_value in priority_values:
+        priority = Priority(name=priority_value)
+        priority.save()
+
+    print("Значения приоритетов успешно добавлены.")
