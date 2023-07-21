@@ -1,12 +1,14 @@
 from django import forms
-from .models import Todo
+from .models import Todo, Label, Priority
 from django.core.exceptions import ValidationError
 
-
 class TodoForm(forms.ModelForm):
+    labels = forms.ModelMultipleChoiceField(queryset=Label.objects.all(), widget=forms.CheckboxSelectMultiple)
+    priority = forms.ModelChoiceField(queryset=Priority.objects.all())
+    parent_task = forms.ModelChoiceField(queryset=Priority.objects.all())
     class Meta:
         model = Todo
-        fields = ['title', 'body', 'user', 'completed']
+        fields = ['title', 'body', 'parent_task', 'user', 'completed', 'labels', 'priority']
 
     def clean_title(self):  # проверка title на длинну
         if len(self.cleaned_data.get('title')) < 2:
