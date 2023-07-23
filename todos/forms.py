@@ -3,13 +3,22 @@ from .models import Todo, Label, Priority
 from django.core.exceptions import ValidationError
 
 class TodoForm(forms.ModelForm):
-    labels = forms.ModelMultipleChoiceField(queryset=Label.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+    label = forms.ModelMultipleChoiceField(queryset=Label.objects.all(), widget=forms.CheckboxSelectMultiple)
     priority = forms.ModelChoiceField(queryset=Priority.objects.all())
-    parent_task = forms.ModelChoiceField(queryset=Priority.objects.all())
+    parent_task = forms.ModelChoiceField(queryset=Todo.objects.all(), required=False)
+
+    # остальной код формы
+
+
     class Meta:
         model = Todo
-        fields = ['title', 'body', 'parent_task', 'user', 'completed', 'labels', 'priority']
+        fields = ['title', 'body', 'parent_task', 'user', 'completed', 'label',  'priority', 'parent_task']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['label'].widget = forms.SelectMultiple(attrs={'class': 'form-control'})
+        self.fields['label'].queryset = Label.objects.all()
     def clean_title(self):  # проверка title на длинну
         if len(self.cleaned_data.get('title')) < 2:
             raise ValidationError('Value must be more then 1 character.')

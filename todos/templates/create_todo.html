@@ -1,8 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
+<script src="{% static 'js/todos.js' %}"></script>
 {% block content %}
 <form action="{% url 'create_todo'%}" method="POST">
-   {% csrf_token %}
-  {{ form }}
-  <button type="submit">Create form</button>
+    {% csrf_token %}
+    {{ form }}
+    <div class="form-group">
+        <label for="id_new_label">New Label:</label>
+        <input type="text" name="new_label" id="id_new_label">
+        <button type="button" onclick="addNewLabel()">Add Label</button>
+    </div>
+    <button type="submit">Create form</button>
 </form>
+
+
 {% endblock %}
