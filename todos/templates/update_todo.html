@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'update_todo' todo_id=form.instance.id%}" method="POST">
+   {% csrf_token %}
+  {{ form }}
+  <button type="submit">Update form</button>
+</form>
+{% endblock %}

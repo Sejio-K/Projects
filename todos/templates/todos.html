@@ -1,14 +1,9 @@
+{% extends 'base.html' %}
 
-{% extends "todos/base.html" %}
 
 {% block content %}
     {% for todo in todos %}
-        <div class="todo">
-            <h2>{{ todo.title }}</h2>
-            <p>User: {{ todo.user }}</p>
-            <p>ID: {{ todo.id }}</p>
-            <p>Body: {{ todo.body }}</p>
-            <button class="completed-btn" data-id="{{ todo.id }}">Выполнено</button>
-        </div>
+        {% include 'includes/todo.html' %}
     {% endfor %}
+
 {% endblock %}

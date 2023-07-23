@@ -1,26 +1,17 @@
-{% extends "todos/base.html" %}
-
-{% block title %}
-    Добавить задачу
-{% endblock %}
-
+{% extends 'base.html' %}
+{% load static %}
+<script src="{% static 'js/todos.js' %}"></script>
 {% block content %}
-  <h1>Добавить задачу</h1>
-  <form method="POST" action="{% url 'add_todo' %}">
+<form action="{% url 'create_todo'%}" method="POST">
     {% csrf_token %}
-    <label for="title">Заголовок:</label>
-    <input type="text" id="title" name="title" required><br><br>
+    {{ form }}
+    <div class="form-group">
+        <label for="id_new_label">New Label:</label>
+        <input type="text" name="new_label" id="id_new_label">
+        <button type="button" onclick="addNewLabel()">Add Label</button>
+    </div>
+    <button type="submit">Create form</button>
+</form>
 
-    <label for="id">id:</label>
-    <input type="text" id="id" name="id" required><br><br>
 
-    <label for="userId">userId:</label>
-    <input type="text" id="userId" name="userId" required><br><br>
-
-
-    <label for="body">Описание:</label>
-    <textarea id="body" name="body"></textarea><br><br>
-    
-    <button type="submit">Добавить задачу</button>
-  </form>
 {% endblock %}
